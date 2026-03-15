@@ -1,110 +1,194 @@
-	let score = 1;
-	let ball;
+let score = 1;
+let balls;
+let gameState = "start";
+
 function setup() {
-	console.log("setup: ");
-	cnv = new Canvas(1920,940);
-	ball = new Sprite(random(850,1000), 100, 30, 'd');
-	ball.color = color(255, 0,0); 
-	world.gravity.y = 5;
-	
-	//Multipliers
-	pointFour = new Sprite(915, 590, 60, 30, 's');
-	pointFour.color = color(255, 235,0); //yellow
-	pointSevenL = new Sprite(850, 590, 60, 30, 's');
-	pointSevenL.color = color(255, 165,0); //light orange
-	 pointSevenR= new Sprite(980, 590, 60, 30, 's');
-	pointSevenR.color = color(255, 165,0); //light orange
-	oneThreeL= new Sprite(785, 590, 60, 30, 's');
-	oneThreeL.color = color(255, 110,0); //dark orange
-	oneThreeR= new Sprite(1046, 590, 60, 30, 's');
-	oneThreeR.color = color(255, 110,0); //dark orange
-	threeL= new Sprite(720, 590, 60, 30, 's');
-	threeL.color = color(255, 50,0); //redish orange
-	threeR= new Sprite(1113, 590, 60, 30, 's');
-	threeR.color = color(255, 50,0); //reddish orange
-	thirteenL= new Sprite(655, 590, 60, 30, 's');
-	thirteenL.color = color(255, 0,0); //red
-	thirteenR= new Sprite(1180, 590, 60, 30, 's');
-	thirteenR.color = color(255, 0,0); //red
-	//plinks
-	for (var i = 0; i < 10; i++) {
-		var block = new Sprite(i*66.67 + 620, 550, 10, 'k');
-		block.color = color(255,255,255); 
-		
-	  }
-	for (var i = 0; i < 9; i++) {
-		var block = new Sprite(i*66.67 + 653, 500, 10, 'k');
-		block.color = color(255,255,255); 
-		
-	  }
-	for (var i = 0; i < 8; i++) {
-		var block = new Sprite(i*66.67 + 685, 450, 10, 'k');
-		block.color = color(255,255,255);
-		
-	  }
-	for (var i = 0; i < 7; i++) {
-		var block = new Sprite(i*66.67 + 720, 400, 10, 'k');
-		block.color = color(255, 255, 255); 
-		
-	  }
-	  for (var i = 0; i < 6; i++) {
-		var block = new Sprite(i*66.67 + 752, 350, 10, 'k');
-		block.color = color(255,255,255);
-		
-	  }
-	  for (var i = 0; i < 5; i++) {
-		var block = new Sprite(i*66.67 + 785, 300, 10, 'k');
-		block.color = color(255,255,255);
-		
-	  }
-	  for (var i = 0; i < 4; i++) {
-		var block = new Sprite(i*66.67 + 815, 250, 10, 'k');
-		block.color = color(255,255,255); 
-		
-	  }
-	  for (var i = 0; i < 3; i++) {
-		var block = new Sprite(i*66.67 + 850, 200, 10, 'k');
-		block.color = color(255,255,255); 
-		
-	  }
-	  
+    console.log("setup: ");
+    cnv = new Canvas(1920,940);
+
+    world.gravity.y = 5;
+
+
+    balls = new Group();
+    balls.diameter = 30;
+    balls.color = color(255,0,0);
+
+    //Multipliers
+    pointFour = new Sprite(915, 590, 60, 30, 's');
+    pointFour.color = color(255, 235,0);
+
+    pointSevenL = new Sprite(850, 590, 60, 30, 's');
+    pointSevenL.color = color(255, 165,0);
+
+    pointSevenR= new Sprite(980, 590, 60, 30, 's');
+    pointSevenR.color = color(255, 165,0);
+
+    oneThreeL= new Sprite(785, 590, 60, 30, 's');
+    oneThreeL.color = color(255, 110,0);
+
+    oneThreeR= new Sprite(1046, 590, 60, 30, 's');
+    oneThreeR.color = color(255, 110,0);
+
+    threeL= new Sprite(720, 590, 60, 30, 's');
+    threeL.color = color(255, 50,0);
+
+    threeR= new Sprite(1113, 590, 60, 30, 's');
+    threeR.color = color(255, 50,0);
+
+    thirteenL= new Sprite(655, 590, 60, 30, 's');
+    thirteenL.color = color(255, 0,0);
+
+    thirteenR= new Sprite(1180, 590, 60, 30, 's');
+    thirteenR.color = color(255, 0,0);
+
+
+    //plinks
+    for (var i = 0; i < 10; i++) {
+        var block = new Sprite(i*66.67 + 620, 550, 10, 'k');
+        block.color = color(255,255,255); 
+    }
+
+    for (var i = 0; i < 9; i++) {
+        var block = new Sprite(i*66.67 + 653, 500, 10, 'k');
+        block.color = color(255,255,255); 
+    }
+
+    for (var i = 0; i < 8; i++) {
+        var block = new Sprite(i*66.67 + 685, 450, 10, 'k');
+        block.color = color(255,255,255);
+    }
+
+    for (var i = 0; i < 7; i++) {
+        var block = new Sprite(i*66.67 + 720, 400, 10, 'k');
+        block.color = color(255,255,255); 
+    }
+
+    for (var i = 0; i < 6; i++) {
+        var block = new Sprite(i*66.67 + 752, 350, 10, 'k');
+        block.color = color(255,255,255);
+    }
+
+    for (var i = 0; i < 5; i++) {
+        var block = new Sprite(i*66.67 + 785, 300, 10, 'k');
+        block.color = color(255,255,255);
+    }
+
+    for (var i = 0; i < 4; i++) {
+        var block = new Sprite(i*66.67 + 815, 250, 10, 'k');
+        block.color = color(255,255,255); 
+    }
+
+    for (var i = 0; i < 3; i++) {
+        var block = new Sprite(i*66.67 + 850, 200, 10, 'k');
+        block.color = color(255,255,255); 
+    }
 }
-	
+
+
 /*******************************************************/
 // draw()
 /*******************************************************/
 function draw() {
-	background(30, 35, 50);
-	fill('red')
-	text(score, 915, 800);
+
+    background(30, 35, 50);
+
+    // START SCREEN
+    if (gameState == "start") {
+
+        fill("white");
+        textSize(60);
+        textAlign(CENTER);
+        text("PUSSUM PLINKO", width/2, 200);
+
+        fill("green");
+        rect(width/2 -100, 350, 200, 60);
+        fill("white");
+        textSize(30);
+        text("START", width/2, 390);
+
+        fill("blue");
+        rect(width/2 -100, 450, 200, 60);
+        fill("white");
+        text("HOW TO PLAY", width/2, 490);
+
+        return;
+    }
+
+    //how to play
+    if (gameState == "how") {
+
+        fill("white");
+        textSize(40);
+        textAlign(CENTER);
+
+        text("HOW TO PLAY", width/2,200);
+        textSize(25);
+        text("Click to drop balls.", width/2,300);
+        text("Balls fall through pegs.", width/2,340);
+        text("Landing slots multiply your score.", width/2,380);
+
+        text("Click anywhere to go back", width/2,500);
+
+        return;
+    }
 
 
-balls.forEach  
-	if (ball.overlaps(pointFour)) hitMultiplier(ball, 0.4);
-	if (ball.overlaps(pointSevenL)) hitMultiplier(ball, 0.7);
-	if (ball.overlaps(pointSevenR)) hitMultiplier(ball, 0.7);
-	
-	if (ball.overlaps(oneThreeL)) hitMultiplier(ball, 1.3);
-	if (ball.overlaps(oneThreeR)) hitMultiplier(ball, 1.3);
-	
-	if (ball.overlaps(threeL)) hitMultiplier(ball, 3);
-	if (ball.overlaps(threeR)) hitMultiplier(ball, 3);
-	
-	if (ball.overlaps(thirteenL)) hitMultiplier(ball, 13);
-	if (ball.overlaps(thirteenR)) hitMultiplier(ball, 13);
+    // GAME
+    fill('red')
+    text(score, 915, 800);
+
+    
+    for (let b of balls) {
+
+        if (b.overlaps(pointFour)) hitMultiplier(b, 0.4);
+        if (b.overlaps(pointSevenL)) hitMultiplier(b, 0.7);
+        if (b.overlaps(pointSevenR)) hitMultiplier(b, 0.7);
+
+        if (b.overlaps(oneThreeL)) hitMultiplier(b, 1.3);
+        if (b.overlaps(oneThreeR)) hitMultiplier(b, 1.3);
+
+        if (b.overlaps(threeL)) hitMultiplier(b, 3);
+        if (b.overlaps(threeR)) hitMultiplier(b, 3);
+
+        if (b.overlaps(thirteenL)) hitMultiplier(b, 13);
+        if (b.overlaps(thirteenR)) hitMultiplier(b, 13);
+    }
+
 }
 
+
 function hitMultiplier(ball, value) {
-	score *= value;
-	ball.remove();
-  }
-  function spawnBall() {
-	ball = new Sprite(random(850,1000), 100, 30, 'd');
-	ball.color = color(255, 0,0); 
-  }
-  function mousePressed () {
-	spawnBall();
-  }
+    score *= value;
+    ball.remove();
+}
+function spawnBall() {
+    let b = new balls.Sprite(random(900,950), 100);
+}
+function mousePressed () {
+
+    if (gameState == "start") {
+
+        if (mouseY > 350 && mouseY < 410) {
+            gameState = "game";
+        }
+
+        if (mouseY > 450 && mouseY < 510) {
+            gameState = "how";
+        }
+
+    }
+
+    else if (gameState == "how") {
+        gameState = "start";
+    }
+
+    else if (gameState == "game") {
+        spawnBall();
+		score - 10;
+    }
+
+}
+
 /*******************************************************/
 //  END OF APP
-/**/
+/*******************************************************/
