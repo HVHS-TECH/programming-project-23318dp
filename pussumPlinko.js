@@ -1,4 +1,4 @@
-let score = 1;
+let score = 5;
 let balls;
 let gameState = "start";
 
@@ -10,9 +10,21 @@ function setup() {
 
 
     balls = new Group();
+    balls.overlaps(balls);
     balls.diameter = 30;
     balls.color = color(255,0,0);
 
+
+    //invisible walls (so ball cant escape)
+  
+    leftWall = new Sprite(710, 380, 10, 400 , 'k');
+    leftWall.color = color(30, 35, 50);
+    leftWall.rotation = 35
+   leftWall.visible = false;
+    rightWall = new Sprite(1125, 380, 10, 400 , 'k');
+    rightWall.color = color(30, 35, 50);
+    rightWall.rotation = 330
+    rightWall.visible= false;
     //Multipliers
     pointFour = new Sprite(915, 590, 60, 30, 's');
     pointFour.color = color(255, 235,0);
@@ -91,7 +103,7 @@ function setup() {
 function draw() {
 
     background(30, 35, 50);
-
+   
     // START SCREEN
     if (gameState == "start") {
 
@@ -126,12 +138,33 @@ function draw() {
         text("Click to drop balls.", width/2,300);
         text("Balls fall through pegs.", width/2,340);
         text("Landing slots multiply your score.", width/2,380);
-
+        fill("red");
+        text("Don't let you score go below 1", width/2,420);
+        fill("white");
         text("Click anywhere to go back", width/2,500);
 
         return;
     }
 
+
+    if (gameState =="game" && score <1) {
+        gameState = "end";
+    }
+
+
+    if (gameState == "end") {
+
+        fill("white");
+        textSize(40);
+        textAlign(CENTER);
+
+        text("BUSTED", width/2,200);
+        textSize(25);
+        text("Refresh To Retry", width/2,300);
+      
+       
+        return;
+    }
 
     // GAME
     fill('red')
@@ -159,10 +192,12 @@ function draw() {
 
 function hitMultiplier(ball, value) {
     score *= value;
+    score = Math.round(score); 
     ball.remove();
 }
 function spawnBall() {
     let b = new balls.Sprite(random(900,950), 100);
+    
 }
 function mousePressed () {
 
@@ -184,7 +219,7 @@ function mousePressed () {
 
     else if (gameState == "game") {
         spawnBall();
-		score - 10;
+		score -=0.05;
     }
 
 }
