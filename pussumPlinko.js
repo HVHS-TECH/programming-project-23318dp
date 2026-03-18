@@ -153,7 +153,7 @@ function draw() {
 
 
     if (gameState == "end") {
-
+        
         fill("white");
         textSize(40);
         textAlign(CENTER);
@@ -219,7 +219,7 @@ function mousePressed () {
 
     else if (gameState == "game") {
         spawnBall();
-		score -=0.05;
+		score *=0.25;
     }
 
 }
