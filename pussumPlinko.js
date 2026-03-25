@@ -1,6 +1,7 @@
 let score = 5;
 let balls;
 let gameState = "start";
+let ballsDropped = 0;
 
 function setup() {
     console.log("setup: ");
@@ -18,11 +19,13 @@ function setup() {
     //invisible walls (so ball cant escape)
   
     leftWall = new Sprite(710, 380, 10, 400 , 'k');
-    leftWall.color = color(30, 35, 50);
+    leftWall.color = color(0,0,0,0);
+    leftWall.stroke = '0';
     leftWall.rotation = 35
    leftWall.visible = false;
     rightWall = new Sprite(1125, 380, 10, 400 , 'k');
-    rightWall.color = color(30, 35, 50);
+    rightWall.color = color(0,0,0,0);
+    rightWall.stroke = '0';
     rightWall.rotation = 330
     rightWall.visible= false;
     //Multipliers
@@ -101,9 +104,13 @@ function setup() {
 // draw()
 /*******************************************************/
 function draw() {
-
+    
     background(30, 35, 50);
-   
+    if (gameState != "game") {
+        allSprites.visible = false;
+    } else {
+        allSprites.visible = true;
+    }
     // START SCREEN
     if (gameState == "start") {
 
@@ -161,7 +168,10 @@ function draw() {
 
         text("BUSTED", width/2,200);
         textSize(25);
-        text("Refresh To Retry", width/2,300);
+        text("Balls Dropped = " + ballsDropped, width/2,700);
+     
+        text("Refresh To Retry", width/2,400);
+
       
        
         return;
@@ -198,6 +208,7 @@ function hitMultiplier(ball, value) {
 }
 function spawnBall() {
     let b = new balls.Sprite(random(900,950), 100);
+    ballsDropped += 1;
     
 }
 function mousePressed () {
@@ -221,6 +232,7 @@ function mousePressed () {
     else if (gameState == "game") {
         spawnBall();
 		score *=0.7;
+        score = Math.round(score); 
     }
 
 }
