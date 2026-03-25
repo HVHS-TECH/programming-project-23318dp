@@ -136,12 +136,13 @@ function draw() {
         text("HOW TO PLAY", width/2,200);
         textSize(25);
         text("Click to drop balls.", width/2,300);
-        text("Balls fall through pegs.", width/2,340);
-        text("Landing slots multiply your score.", width/2,380);
+        text("Every ball cost 30% of your score.", width/2,340);
+        text("Landing slots multiply your score .", width/2,380);
+        text("Game is inteded for 1920x1080p screen sizes.", width/2,420);
         fill("red");
-        text("Don't let you score go below 1", width/2,420);
+        text("If score lowers past 1 you fail", width/2,460);
         fill("white");
-        text("Click anywhere to go back", width/2,500);
+        text("Click anywhere to go back", width/2,540);
 
         return;
     }
@@ -219,7 +220,7 @@ function mousePressed () {
 
     else if (gameState == "game") {
         spawnBall();
-		score *=0.25;
+		score *=0.7;
     }
 
 }
