@@ -232,7 +232,7 @@ function mousePressed () {
     else if (gameState == "game") {
         spawnBall();
 		score *=0.7;
-        score = Math.round(score); 
+        
     }
 
 }
