@@ -155,9 +155,7 @@ function draw() {
     }
 
 
-    if (gameState =="game" && score <1) {
-        gameState = "end";
-    }
+    
 
 
     if (gameState == "end") {
@@ -180,6 +178,12 @@ function draw() {
     // GAME
     fill('red')
     text(score, 915, 800);
+    fill("red");
+        rect(width/4 -100, 350, 200, 60);
+    fill("white");
+        textSize(30);
+        text("End Game", width/4, 390);
+
 
     
     for (let b of balls) {
@@ -188,20 +192,24 @@ function draw() {
         if (b.overlaps(pointSevenL)) hitMultiplier(b, 0.7);
         if (b.overlaps(pointSevenR)) hitMultiplier(b, 0.7);
 
-        if (b.overlaps(oneThreeL)) hitMultiplier(b, 1.3);
-        if (b.overlaps(oneThreeR)) hitMultiplier(b, 1.3);
+        if (b.overlaps(oneThreeL)) hitMultiplier(b, 1);
+        if (b.overlaps(oneThreeR)) hitMultiplier(b, 1);
 
-        if (b.overlaps(threeL)) hitMultiplier(b, 3);
-        if (b.overlaps(threeR)) hitMultiplier(b, 3);
+        if (b.overlaps(threeL)) hitMultiplier(b, 1.4);
+        if (b.overlaps(threeR)) hitMultiplier(b, 1.4);
 
-        if (b.overlaps(thirteenL)) hitMultiplier(b, 13);
-        if (b.overlaps(thirteenR)) hitMultiplier(b, 13);
+        if (b.overlaps(thirteenL)) hitMultiplier(b, 2);
+        if (b.overlaps(thirteenR)) hitMultiplier(b, 2);
     }
 
 }
 
 
 function hitMultiplier(ball, value) {
+
+    if (gameState =="game" && score <=1) {
+        gameState = "end";
+    }
     score *= value;
     score = Math.round(score); 
     ball.remove();
@@ -231,10 +239,13 @@ function mousePressed () {
 
     else if (gameState == "game") {
         spawnBall();
-		score *=0.7;
-        
+		score -=1;
+        score = Math.round(score); 
+        if (mouseY > width/4 && mouseY < ) {
+            gameState = "end";
+        }
     }
-
+   
 }
 
 /*******************************************************/
