@@ -182,7 +182,7 @@ function draw() {
         rect(width/4 -100, 350, 200, 60);
     fill("white");
         textSize(30);
-        text("End Game", width/4, 390);
+        text("End Game", 480, 390);
 
 
     
@@ -200,6 +200,9 @@ function draw() {
 
         if (b.overlaps(thirteenL)) hitMultiplier(b, 2);
         if (b.overlaps(thirteenR)) hitMultiplier(b, 2);
+    }
+    if (mouseY > 480 && mouseY <390 ) {
+        gameState = "end";
     }
 
 }
@@ -241,9 +244,7 @@ function mousePressed () {
         spawnBall();
 		score -=1;
         score = Math.round(score); 
-        if (mouseY > width/4 && mouseY < ) {
-            gameState = "end";
-        }
+        
     }
    
 }
