@@ -169,6 +169,7 @@ function draw() {
         text("Balls Dropped = " + ballsDropped, width/2,700);
      
         text("Refresh To Retry", width/2,400);
+        
 
       
        
